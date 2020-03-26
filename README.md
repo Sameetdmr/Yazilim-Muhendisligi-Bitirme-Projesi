@@ -1,4 +1,5 @@
 # Haber & Deprem App
+-- Her hafta yeni özellik eklenip güncellenmiş hali atılacaktır.
 
 # Yeni Özellikler
   - Uygun renkler kullanıldı. 
