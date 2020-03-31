@@ -111,13 +111,13 @@ class WidgetCategory extends StatefulWidget {
 
 class _WidgetCategoryState extends State<WidgetCategory> {
   final listCategories = [
-    Category('', 'All'),
-    Category('assets/images/img_business.png', 'Business'),
-    Category('assets/images/img_entertainment.png', 'Entertainment'),
-    Category('assets/images/img_healt.png', 'Healt'),
-    Category('assets/images/img_science.png', 'Science'),
-    Category('assets/images/img_sport.png', 'Sport'),
-    Category('assets/images/img_technology.png', 'Technology'),
+    Category('', 'Hepsi'),
+    Category('assets/images/img_is.jpg', 'İş'),
+    Category('assets/images/img_eglence.jpg', 'Eğlence'),
+    Category('assets/images/img_saglik.png', 'Sağlık'),
+    Category('assets/images/img_bilim.png', 'Bilim'),
+    Category('assets/images/img_spor.jpg', 'Spor'),
+    Category('assets/images/img_teknoloji.png', 'Teknoloji'),
   ];
   int indexSelectedCategory = 0;
   @override
