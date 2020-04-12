@@ -1,7 +1,12 @@
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haber_deprem_app/src/bloc/home/home_bloc.dart';
 import 'package:haber_deprem_app/src/model/category/category.dart';
+import 'package:haber_deprem_app/src/model/category/topheadlinesnews/response_top_headlines_news.dart';
 import 'package:intl/intl.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -40,10 +45,44 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-          // Todo do something
+          SizedBox(height: 16.0),
+          _buildWidgetLabelLatestNews(context),
+          _buildWidgetSubtitleLatestNews(context),
+          Expanded(
+            child: WidgetLatestNews(),
+          )
         ],
       ),
     ));
+  }
+
+  Widget _buildWidgetSubtitleLatestNews(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      child: Text(
+        'En popüler haberler',
+        style: Theme.of(context).textTheme.caption.merge(
+              TextStyle(
+                color: Color(0xFF325384).withOpacity(0.5),
+              ),
+            ),
+      ),
+    );
+  }
+
+  Widget _buildWidgetLabelLatestNews(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      child: Text(
+        'Son Haberler',
+        style: Theme.of(context).textTheme.subtitle.merge(
+              TextStyle(
+                fontSize: 18.0,
+                color: Color(0xFF325384).withOpacity(0.8),
+              ),
+            ),
+      ),
+    );
   }
 
   String getstrToday() {
@@ -146,7 +185,11 @@ class _WidgetCategoryState extends State<WidgetCategory> {
               children: <Widget>[
                 GestureDetector(
                   onTap: () {
-                    //Todo yapılacaklar-2
+                    setState(() {
+                      indexSelectedCategory = index;
+                      homeBloc.add(DataEvent(
+                          listCategories[indexSelectedCategory].title));
+                    });
                   },
                   child: index == 0
                       ? Container(
@@ -156,7 +199,7 @@ class _WidgetCategoryState extends State<WidgetCategory> {
                             shape: BoxShape.circle,
                             color: Color(0xFFBDCDDE),
                             border: indexSelectedCategory == index
-                                ? Border.all(color: Colors.white, width: 5.0)
+                                ? Border.all(color: Colors.teal, width: 2.0)
                                 : null,
                           ),
                           child: Icon(Icons.apps, color: Colors.white),
@@ -172,8 +215,8 @@ class _WidgetCategoryState extends State<WidgetCategory> {
                             ),
                             border: indexSelectedCategory == index
                                 ? Border.all(
-                                    color: Colors.white,
-                                    width: 5.0,
+                                    color: Colors.teal,
+                                    width: 2.0,
                                   )
                                 : null,
                           ),
@@ -183,10 +226,11 @@ class _WidgetCategoryState extends State<WidgetCategory> {
                 Text(
                   itemCategory.title,
                   style: TextStyle(
-                    fontSize: 14.0,
-                    color: Color(0xFF325384),
-                    fontWeight: indexSelectedCategory == index ? FontWeight.bold : FontWeight.normal
-                  ),
+                      fontSize: 14.0,
+                      color: Color(0xFF325384),
+                      fontWeight: indexSelectedCategory == index
+                          ? FontWeight.bold
+                          : FontWeight.normal),
                 )
               ],
             ),
@@ -195,5 +239,100 @@ class _WidgetCategoryState extends State<WidgetCategory> {
         itemCount: listCategories.length,
       ),
     );
+  }
+}
+
+class WidgetLatestNews extends StatefulWidget {
+  @override
+  _WidgetLatestNewsState createState() => _WidgetLatestNewsState();
+}
+
+class _WidgetLatestNewsState extends State<WidgetLatestNews> {
+  @override
+  Widget build(BuildContext context) {
+    MediaQueryData mediaQuery = MediaQuery.of(context);
+    final HomeBloc homeBloc = BlocProvider.of<HomeBloc>(context);
+    return Padding(
+        padding: EdgeInsets.only(
+          left: 16.0,
+          top: 8.0,
+          right: 16.0,
+          bottom: mediaQuery.padding.bottom + 16.0,
+        ),
+        child: BlocListener<HomeBloc, DataState>(
+          listener: (context, state) {},
+          child: BlocBuilder(
+            bloc: homeBloc,
+            builder: (context, state) {
+              return _buildWidgetContentLatestNews(state, mediaQuery);
+            },
+          ),
+        ));
+  }
+
+  Widget _buildWidgetContentLatestNews(
+      DataState state, MediaQueryData mediaQuery) {
+    if (state is DataLoading) {
+      return Center(
+        child: Platform.isAndroid
+            ? CircularProgressIndicator()
+            : CupertinoActivityIndicator(),
+      );
+    } else if (state is DataSuccess) {
+      ResponseTopHeadlinesNews data = state.data;
+      return ListView.separated(
+        padding: EdgeInsets.zero,
+        itemBuilder: (context, index) {
+          Article itemArticle = data.articles[index];
+          if (index == 0) {
+            return Stack(
+              children: <Widget>[
+                ClipRRect(
+                  child: Image.network(
+                    itemArticle.urlToImage,
+                    height: 192.0,
+                    width: mediaQuery.size.width,
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                ),
+                GestureDetector(
+                  onTap: () async {},
+                  child: Container(
+                    width: mediaQuery.size.width,
+                    height: 192.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8.0),
+                      ),
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.black.withOpacity(0.8),
+                          Colors.black.withOpacity(0.0)
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: [
+                          0.0,
+                          0.7,
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            );
+          } else {}
+        },
+        separatorBuilder: (context, index) {
+          return Divider();
+        },
+        itemCount: data.articles.length,
+      );
+    } else {
+      return Container(
+        child: Center(child: Text('Data başarısız')),
+      );
+    }
   }
 }

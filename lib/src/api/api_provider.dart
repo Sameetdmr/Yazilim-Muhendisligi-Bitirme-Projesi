@@ -48,7 +48,7 @@ class ApiProvider {
 
   Future<ResponseTopHeadlinesNews> getTopHealtHeadlinesNews() async {
     try{
-      final response = await _dio.get('$_baseUrl&category=healt');
+      final response = await _dio.get('$_baseUrl&category=health');
       return ResponseTopHeadlinesNews.fromJson(response.data);
     }
     catch(error,stacktrace){
