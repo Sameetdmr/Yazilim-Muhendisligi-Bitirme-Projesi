@@ -6,9 +6,9 @@ part of 'response_top_headlines_news.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ResponseTopHeadlinesNews _$ResponseTopHeadlinesNewsFromJson(
+ResponseHaberBasliklari _$ResponseTopHeadlinesNewsFromJson(
     Map<String, dynamic> json) {
-  return ResponseTopHeadlinesNews(
+  return ResponseHaberBasliklari(
     json['status'] as String,
     json['totalResults'] as int,
     (json['articles'] as List)
@@ -19,7 +19,7 @@ ResponseTopHeadlinesNews _$ResponseTopHeadlinesNewsFromJson(
 }
 
 Map<String, dynamic> _$ResponseTopHeadlinesNewsToJson(
-        ResponseTopHeadlinesNews instance) =>
+        ResponseHaberBasliklari instance) =>
     <String, dynamic>{
       'status': instance.status,
       'totalResults': instance.totalResults,

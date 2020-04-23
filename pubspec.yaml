@@ -10,8 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # A powerful Http client for Dart, which supports interceptors, FormData, Request Cancellation
-  # File Downloading, Timeout etc.
+  # Http istemcisi
+  # Dosya indirme vb.
   dio: ^3.0.3
 
   # Flutter widgets that make it easy to implement the BLoC design pattern.
@@ -33,7 +33,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   
-  # Automatically generate code for converting to and from JSON by annotating Dart classes.
+  # Dart sınıflarına otomatik olarak json parçaları ekler
+  # Sınıf içerisine de açıklama ekler
   json_serializable: ^3.2.3
 
   # Tools to write binaries that run builders.

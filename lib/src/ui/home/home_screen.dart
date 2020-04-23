@@ -279,7 +279,7 @@ class _WidgetLatestNewsState extends State<WidgetLatestNews> {
             : CupertinoActivityIndicator(),
       );
     } else if (state is DataSuccess) {
-      ResponseTopHeadlinesNews data = state.data;
+      ResponseHaberBasliklari data = state.data;
       return ListView.separated(
         padding: EdgeInsets.zero,
         itemBuilder: (context, index) {

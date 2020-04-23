@@ -2,24 +2,24 @@ import 'package:json_annotation/json_annotation.dart';
 part 'response_top_headlines_news.g.dart';
 
 @JsonSerializable()
-class ResponseTopHeadlinesNews {
+class ResponseHaberBasliklari {
   String status;
   int totalResults;
   List<Article> articles;
   @JsonKey(ignore: true)
   String error;
 
-  ResponseTopHeadlinesNews(this.status,this.totalResults,this.articles);
+  ResponseHaberBasliklari(this.status,this.totalResults,this.articles);
 
-  ResponseTopHeadlinesNews.withError(this.error);
+  ResponseHaberBasliklari.withError(this.error);
 
-  factory ResponseTopHeadlinesNews.fromJson(Map<String, dynamic> json) => _$ResponseTopHeadlinesNewsFromJson(json);
+  factory ResponseHaberBasliklari.fromJson(Map<String, dynamic> json) => _$ResponseTopHeadlinesNewsFromJson(json);
 
   Map<String, dynamic> toJson() => _$ResponseTopHeadlinesNewsToJson(this);
 
   @override
   String toString() {
-    return 'ResponseTopHeadlinesNews{status: $status,totalResults: $totalResults,articles: $articles}';
+    return 'ResponseHaberBasliklari{Durum: $status,toplamSonuç: $totalResults,Makale: $articles}';
   }
 }
 

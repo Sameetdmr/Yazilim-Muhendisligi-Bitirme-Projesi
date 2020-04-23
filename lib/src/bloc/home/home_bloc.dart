@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:haber_deprem_app/src/api/api_repository.dart';
+import 'package:haber_deprem_app/src/api/api_depo.dart';
 import 'package:haber_deprem_app/src/model/category/topheadlinesnews/response_top_headlines_news.dart';
 
 abstract class DataState {}
@@ -9,7 +9,7 @@ class DataInitial extends DataState{}
 class DataLoading extends DataState{}
 
 class DataSuccess extends DataState{
-  final ResponseTopHeadlinesNews data;
+  final ResponseHaberBasliklari data;
 
   DataSuccess(this.data);
 }
@@ -27,7 +27,7 @@ class DataEvent{
 }
 
 class HomeBloc extends Bloc<DataEvent,DataState>{
-  final ApiRepository apiRepository = ApiRepository();
+  final ApiDepo apidepo = ApiDepo();
   @override
   // TODO: implement initialState
   DataState get initialState => DataInitial();
@@ -38,7 +38,7 @@ class HomeBloc extends Bloc<DataEvent,DataState>{
     final categoryLowerCase = event.category.toLowerCase();
     switch(categoryLowerCase){
       case 'hepsi':
-        final data = await apiRepository.fetchTopHeadlinesNews();
+        final data = await apidepo.fetchEnCokOkunanHaberler();
         if(data.error==null){
           yield DataSuccess(data);
         }else{
@@ -46,7 +46,7 @@ class HomeBloc extends Bloc<DataEvent,DataState>{
         }
         break;
         case 'iş':
-        final data = await apiRepository.fetchTopBusinessHeadlinesNews();
+        final data = await apidepo.fetchIsHaberleri();
         if(data.error==null){
           yield DataSuccess(data);
         }else{
@@ -54,7 +54,7 @@ class HomeBloc extends Bloc<DataEvent,DataState>{
         }
         break;
         case 'eğlence':
-        final data = await apiRepository.fetchTopEntertainmentHeadlinesNews();
+        final data = await apidepo.fetchEglenceHaberleri();
         if(data.error==null){
           yield DataSuccess(data);
         }else{
@@ -62,7 +62,7 @@ class HomeBloc extends Bloc<DataEvent,DataState>{
         }
         break;
         case 'sağlık':
-        final data = await apiRepository.fetchTopHealtHeadlinesNews();
+        final data = await apidepo.fetchSalikHaberleri();
         if(data.error==null){
           yield DataSuccess(data);
         }else{
@@ -70,7 +70,7 @@ class HomeBloc extends Bloc<DataEvent,DataState>{
         }
         break;
         case 'bilim':
-        final data = await apiRepository.fetchTopScienceHeadlinesNews();
+        final data = await apidepo.fetchBilimHaberleri();
         if(data.error==null){
           yield DataSuccess(data);
         }else{
@@ -78,7 +78,7 @@ class HomeBloc extends Bloc<DataEvent,DataState>{
         }
         break;
         case 'spor':
-        final data = await apiRepository.fetchTopSportHeadlinesNews();
+        final data = await apidepo.fetchSporHaberleri();
         if(data.error==null){
           yield DataSuccess(data);
         }else{
@@ -86,7 +86,7 @@ class HomeBloc extends Bloc<DataEvent,DataState>{
         }
         break;
         case 'teknoloji':
-        final data = await apiRepository.fetchTopTechnologyHeadlinesNews();
+        final data = await apidepo.fetchTeknolojiHaberleri();
         if(data.error==null){
           yield DataSuccess(data);
         }else{
