@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:haber_deprem_app/src/model/category/topheadlinesnews/response_top_headlines_news.dart';
+import 'package:haber_deprem_app/src/model/Kategori/Haber_Basliklari/response_top_headlines_news.dart';
 
 
 class ApiSaglayici {
