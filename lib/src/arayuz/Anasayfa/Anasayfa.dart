@@ -2,15 +2,13 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:haber_deprem_app/src/bloc/home/home_bloc.dart';
 import 'package:haber_deprem_app/src/model/Kategori/category.dart';
 import 'package:haber_deprem_app/src/model/Kategori/Haber_Basliklari/response_top_headlines_news.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-
-
 
 final GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
 
@@ -20,7 +18,9 @@ class AnaSayfa extends StatelessWidget {
     var stringTarih = getTarih();
     var mediaQuery = MediaQuery.of(context);
     double paddingTop = mediaQuery.padding.top;
-    return Scaffold(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+      child: Scaffold(
         key: scaffoldState,
         body: BlocProvider<HomeBloc>(
           create: (context) => HomeBloc(),
@@ -59,7 +59,9 @@ class AnaSayfa extends StatelessWidget {
               )
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Widget _SonHaberlerAltYaziEkleme(BuildContext context) {
@@ -187,10 +189,11 @@ class _KategoriWidgetState extends State<KategoriWidget> {
                             shape: BoxShape.circle,
                             color: Color(0xFF2a5624),
                             border: indexSelectedCategory == index
-                                ? Border.all(color: Colors.white,width: 2.0)
+                                ? Border.all(color: Colors.white, width: 2.0)
                                 : null,
                           ),
-                          child: Icon(Icons.wifi_tethering, color: Colors.white),
+                          child:
+                              Icon(Icons.wifi_tethering, color: Colors.white),
                         )
                       : Container(
                           width: 48.0,
