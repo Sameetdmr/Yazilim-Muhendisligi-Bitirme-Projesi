@@ -274,7 +274,9 @@ class _TumHaberlerWidgetState extends State<TumHaberlerWidget> {
     if (state is DataLoading) {
       return Center(
         child: Platform.isAndroid
-            ? CircularProgressIndicator()
+            ? CircularProgressIndicator(
+              backgroundColor: Colors.teal[100],
+            )
             : CupertinoActivityIndicator(),
       );
     } else if (state is DataSuccess) {

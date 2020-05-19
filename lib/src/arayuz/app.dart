@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import './Animasyon/animasyon.dart';
 import 'Giris/giris.dart';
 
 class App extends StatelessWidget {
@@ -14,7 +14,7 @@ class App extends StatelessWidget {
           ),
         ),
       ),
-      home: GirisSayfasi(),
+      home: AnimasyonEkrani(),
     );
   }
 }

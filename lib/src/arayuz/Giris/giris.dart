@@ -50,16 +50,19 @@ class GirisSayfasi extends StatelessWidget {
                         child: Container(
                           margin: EdgeInsetsDirectional.only(bottom: 25.0),
                           padding: EdgeInsets.symmetric(
-                              horizontal: 25, vertical: 15),
+                              horizontal: 30, vertical: 15),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
-                            color: Colors.red[300],
+                            color: Colors.teal[100],
                           ),
                           child: Row(
                             children: <Widget>[
                               Text(
-                                "Giriş Yap",
-                                style: TextStyle(color: Colors.black),
+                                "İleri",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
                                 width: 10.0,
@@ -67,7 +70,7 @@ class GirisSayfasi extends StatelessWidget {
                               Icon(
                                 Icons.arrow_forward_ios,
                                 color: Colors.black,
-                              )
+                              ),
                             ],
                           ),
                         ),
