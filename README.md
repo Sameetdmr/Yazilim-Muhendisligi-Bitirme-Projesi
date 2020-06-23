@@ -2,6 +2,8 @@
 
 [![Codemagic build status](https://api.codemagic.io/apps/5ef1a434c0adbfcb949f1e0f/5ef1a434c0adbfcb949f1e0e/status_badge.svg)](https://codemagic.io/apps/5ef1a434c0adbfcb949f1e0f/5ef1a434c0adbfcb949f1e0e/latest_build)
 
+> Build alınmış olup .apk dosyasını elde edebilirsiniz.
+
 > Fırat Üniversitesi Teknoloji Fakültesi Yazılım Mühendisliği Bölümü 
 
 > 2019-2020 Bahar dönemi
